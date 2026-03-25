@@ -1,6 +1,9 @@
-lista_acoes = ["digitar texto" , "muda cor" , "inserir imagem"]
-lista_acoes.remove
-lista_acoes.pop(2)
+pendentes = ["digitar texto" , "muda cor" , "inserir imagem"]
+print (f"lista de pendentes {pendentes}")
+concluidos = []
 
-lista = len (lista_acoes)
-print(f"lista atual{lista_acoes}")
+concluidos.append(pendentes[0]) 
+pendentes.pop(0)
+
+print("pendentes: " , pendentes) 
+print("concluidos: " , concluidos)
