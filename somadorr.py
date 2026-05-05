@@ -17,4 +17,4 @@ carrinho = [120.50, 89.90, 300.00, 45.60]
 
 valor_final = somar_carrinho(carrinho)
 
-print(f"Valor final a pagar: R$ {valor_final:.2f}") 
+print(f"Valor final a pagar: R$ {valor_final}") 
