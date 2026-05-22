@@ -1,0 +1,9 @@
+{
+    "nome": "Ricardo",
+    "aprovado": true,
+    "materias": [
+        "LÃ³gica",
+        "Python",
+        "JSON"
+    ]
+}
