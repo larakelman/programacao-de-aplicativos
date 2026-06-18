@@ -17,14 +17,15 @@ def cadastrar_professor():
                     telefone TEXT , 
                     materia TEXT , 
                     idade INTEGER ,
-                    cpf TEXT UNIQUE NOT NULL ,
+                    cpf TEXT NOT NULL ,
                     salario REAL , 
                     nome_escola TEXT
-                    )''') 
-    comando_inserir = f''' insert into professores (nome, materia, idade, cpf, salario, nome_escola)
-    VALUES (' {nome} ', {telefone} ' , {materia} ' , {idade} ' , {cpf} ' , {salario} ' , {nome_escola}) '''
+                    )''')
 
-    cursor.execute(cadastrar_professor)
+    comando_inserir = f''' insert into professores (nome, telefone, materia, idade, cpf, salario, nome_escola)
+                        VALUES ('{nome}', '{telefone}', '{materia}', {idade},'{cpf}', {salario}, '{nome_escola}') '''
+
+    cursor.execute(comando_inserir) 
     conexao.commit()
 
 def listar():
@@ -35,11 +36,9 @@ def listar():
     if not todos_professores: 
         print("nenhum professor cadastrado")
     else: 
-        for aluno in todos_professores:
-            print(f"nome: {professor[0]}, telefone: {professor[1]}, materia: {professor[2]}, idade: {professor[3]}, cpf: {professor[4]}, salario: {professor[5]}, nome_escola: {professor[6]}")
-
+        for professor in todos_professores:
+            print(professor)
 def atualizar():
-    cursor = conexao.cursor()
     id_busca = int(input("deseja oque voce quer alterar: "))
 
     cursor.execute(f'''SELECT * FROM professores WHERE ID = {id_busca}''')
@@ -47,7 +46,6 @@ def atualizar():
 
     if not professor:
         print: ("aluno não encontrado")
-        conexao.close()
         return
 
     else:
@@ -59,36 +57,35 @@ def atualizar():
         novo_salario = input("digite o novo salario do professor: ")
         nome_escola = input("digite a nova escola do professor: ")
 
-        comando = f''' UPDATE professores SET nome ' {novo_nome} ',
-                telefone = '{novo_telefone}' , materia = '{nova_materia}',
-                idade = '{nova_idade}', cpf = '{novo_cpf}', salario = {novo_salario}, 
-                escola = '{escola}'
-                WHERE id = {id_busca}'''
+        comando = f''' UPDATE professores SET nome = '{novo_nome}', telefone = '{novo_telefone}', materia = '{nova_materia}', idade = '{nova_idade}', cpf = '{novo_cpf}', salario = {novo_salario}, nome_escola = '{nome_escola}' WHERE ID = {id_busca}'''
         
         cursor.execute(comando)
         conexao.commit()
 
-def excluir_professor():
-    cursor = conexao.cursor()  
-    listar_aluno()  
-    id_aluno = int(input("digite o id do professor: "))
+def excluir_professor(): 
+    listar()  
+    id_professor = int(input("digite o id do professor: "))
 
     cursor.execute(f''' DELETE FROM professores WHERE ID = {id_professor}''')
     conexao.commit()
-    conexao.close()
+    
 
-while True:
-    print("1- cadastrar_professor / 2 - listar / 3- atualizar / 4- exluir_professor / 5- sair")
-    opcao = int(input("qual opcao vc deve escolher? "))
+def menu():
+    opcao=0
+    while opcao != 5:
+        print("1- cadastrar_professor / 2 - listar / 3- atualizar / 4- exluir_professor / 5- sair")
+        opcao = int(input("qual opcao vc deve escolher? "))
 
-    if opcao == 1: cadastrar_professor()
-    if opcao == 2: listar()
-    if opcao == 3: atualizar()
-    if opcao == 4: excluir_professor()
-    if opcao == 5: 
-        print("encerrando sistema")
-        break 
-    else:
-        print("opcao invalida")
+        if opcao == 1: cadastrar_professor()
+        if opcao == 2: listar()
+        if opcao == 3: atualizar()
+        if opcao == 4: excluir_professor()
+        if opcao == 5: 
+            print("encerrando sistema")
+            conexao.close() 
+            return 
+        else:
+            print("opcao invalida")
 
-    conexao.close() 
+    
+menu()
