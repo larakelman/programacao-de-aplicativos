@@ -10,4 +10,9 @@ def inicializar_banco():
                    nome TEXT NOT NULL )
                    ''')
     
+    conexao.close()
+    conexao.commit()
+
+    #o banco de dados não está salvando as alterações por conta que falta o conexao.commit()
+    
     
