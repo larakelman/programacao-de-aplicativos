@@ -21,6 +21,5 @@ def cadastrar_professor(nome, cpf):
 
 
 
-# A função cria a tabela "professores", mas não insere os dados recebidos para o "nome" e "cpf
-# Está faltando o comando INSERT INTO para colocar o professor na tabela 
-# adicionar o conexao.commit() para salvar as alterações e conexao.close() para fechar a conexão no banco de dados
+# o erro era por que o cpf não estava unique e ele so pode ser unico 
+# entao para não dar erro tem que colocar unique no cpf

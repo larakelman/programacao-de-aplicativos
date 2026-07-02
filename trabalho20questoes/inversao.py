@@ -23,4 +23,4 @@ def criar_tabelas():
     conexao.commit()
     conexao.close()         
         
-    #inverter as tabelas por a de baixo para cima, isso vai fazer a tabela primeiro e não puxar a tabela que não existe
+    #inverter as tabelas por a de baixo para cima, isso vai fazer a tabela primeiro e não puxar a tabela que não existe, por conta que tava puxando os dados de uma tabela que não existe

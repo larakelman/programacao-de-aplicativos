@@ -11,15 +11,17 @@ try:
     cursor.execute("INSERT INTO alunos (nome, id_turma) VALUES (?, ?)", (nome,
  id_turma))
 except ValueError: 
-    conexao.commit()
+     print("Erro: Digite apenas numeros!")
 except sqlite3.eror:
     print("erro no banco de dados")
 finally:
-        if 'conexao' in locals:
-             conexao.close()
+        conexao.close()
 
-#faltou adicionar um excepet que é "except ValueError:"
-        
+#  A conversão int() gera um ValueError 
+# Falta um execept para capturar o erro de escrita
+
+
+
        
         
     
