@@ -1,26 +1,15 @@
 import sqlite3
 
-
-def cadastrar_serie_seguro(nome, id_escola):
-    conexao = None
-
-    try:
-        conexao = sqlite3.connect('sistema_escola.db')
+def cadastrar_serie_seguro(nome, id_escola): 
+    try:  
+        conexao = sqlite3.connect('sistema.db')
         cursor = conexao.cursor()
+        cursor.execute("INSERT INTO series (nome_serie, id_escola) VALUES (?, ?)", (nome, id_escola))
+    except sqlite3.error as e:
+        print("erro técnico:", e)
+    if conexao: 
+        conexao.close()
 
-        cursor.execute(
-            "INSERT INTO series (nome_serie, id_escola) VALUES (?,?)",
-            (nome, id_escola)
-        )
 
-        conexao.commit()
-
-    except sqlite3.Error as e:
-        print("Erro técnico:", e)
-
-    finally:
-        if conexao:
-            conexao.close()
-
-# Se a conexão falhar, ela não existe e o finally tenta fechar algo que não foi criado.
-
+# deu erro por conta que o conexao poderia dar erro por conta do finally vai fechar alguma coisa que vai dar erro
+# adicionmos if conexao:
